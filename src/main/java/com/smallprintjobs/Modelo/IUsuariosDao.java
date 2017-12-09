@@ -1,5 +1,6 @@
 package com.smallprintjobs.Modelo;
 
+import java.sql.Connection;
 import java.util.Date;
 
 import com.smallprintjobs.Beans.Usuario;
@@ -11,16 +12,17 @@ public interface IUsuariosDao  {
 	
 //	public UsuariosDaoImpl() throws BussinessException;
 	
-    void insert(Usuario usuario) throws BussinessException;
+//    void insert(Usuario usuario) throws BussinessException;
     
-    Usuario get(int id_user) throws BussinessException;
+    void searchUser() throws BussinessException;
 
-    void delete(int id_user) throws BussinessException;
-    
-    void insertUsuario(String alias, String surname, String name, Date birth, String sex, String degrees, String password,
-			String mail, Boolean enable, Boolean mailVerify);
-    
+//    void delete(int id_user) throws BussinessException;
+//    
+//    void insertUsuario(String alias, String surname, String name, Date birth, String sex, String degrees, String password,
+//			String mail, Boolean enable, Boolean mailVerify);
+//    
 
+    
 //
 //	
 //	

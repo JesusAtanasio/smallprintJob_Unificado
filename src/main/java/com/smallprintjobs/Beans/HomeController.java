@@ -40,12 +40,10 @@ public class HomeController {
 	
 	@RequestMapping(value="/Usuario", method = RequestMethod.GET)
 	public @ResponseBody Usuario ObtenerUsuario(@RequestParam(value="id", required=true) int id) {
-		//L�gica para obtener los datos del Usuario
-		
-		
+		//Lógica para obtener los datos del Usuario
 		
 		Usuario U = new Usuario();
-		U.setName("Jes�s");
+		U.setName("Jesus");
 		U.setSurname("Atc");
 		U.setMail("mail@mail.com");
 		
