@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-feb-2017 21:02:19 by Hibernate Tools 5.2.0.CR1 -->
+<hibernate-mapping>
+    <class name="modelo.Comentarios" table="COMENTARIOS" catalog="idraPonferrada" optimistic-lock="version">
+        <id name="idCom" type="java.lang.Integer">
+            <column name="id_com" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="empresas" class="modelo.Empresas" fetch="select">
+            <column name="id_emp" not-null="true" />
+        </many-to-one>
+        <many-to-one name="id_user" class="modelo.Usuario" fetch="select">
+            <column name="id_user" not-null="true" />
+        </many-to-one>
+        <property name="departamento" type="string">
+            <column name="DEPARTAMENTO" length="20" />
+        </property>
+        <property name="proyecto" type="string">
+            <column name="PROYECTO" length="20" />
+        </property>
+        <property name="fechaCom" type="date">
+            <column name="FECHA_COM" length="10" not-null="true" />
+        </property>
+        <property name="fechaIniPro" type="date">
+            <column name="FECHA_INI_PRO" length="10" not-null="true" />
+        </property>
+        <property name="fechaFinProyecto" type="date">
+            <column name="FECHA_FIN_PROYECTO" length="10" />
+        </property>
+        <property name="comentario" type="string">
+            <column name="COMENTARIO" length="200" />
+        </property>
+        <property name="valoracion" type="java.lang.Integer">
+            <column name="VALORACION" />
+        </property>
+    </class>
+</hibernate-mapping>

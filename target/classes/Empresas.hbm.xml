@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-feb-2017 21:02:19 by Hibernate Tools 5.2.0.CR1 -->
+<hibernate-mapping>
+    <class name="modelo.Empresas" table="EMPRESAS" catalog="idraPonferrada" optimistic-lock="version">
+        <id name="idEmp" type="java.lang.Integer">
+            <column name="id_emp" />
+            <generator class="identity" />
+        </id>
+        <property name="cif" type="string">
+            <column name="CIF" length="9" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="29" />
+        </property>
+        <property name="sector" type="string">
+            <column name="SECTOR" length="20" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="DIRECCION" length="50" />
+        </property>
+        <property name="localidad" type="string">
+            <column name="LOCALIDAD" length="40" />
+        </property>
+        <property name="provincia" type="string">
+            <column name="PROVINCIA" length="20" />
+        </property>
+        <property name="pais" type="string">
+            <column name="PAIS" length="20" />
+        </property>
+        <property name="codPostal" type="string">
+            <column name="COD_POSTAL" length="30" />
+        </property>
+        <property name="sede" type="string">
+            <column name="SEDE" length="30" />
+        </property>
+        <property name="web" type="string">
+            <column name="WEB" length="30" />
+        </property>
+        <set name="comentarioses" table="COMENTARIOS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_emp" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Comentarios" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-feb-2017 21:02:19 by Hibernate Tools 5.2.0.CR1 -->
+<hibernate-mapping>
+    <class name="modelo.Usuario" table="USUARIOS" catalog="idraPonferrada" optimistic-lock="version">
+        <id name="id_user" type="java.lang.Integer">
+            <column name="ID_USER" />
+            <generator class="identity" />
+        </id>
+        <property name="alias" type="string">
+            <column name="ALIAS" length="20" />
+        </property>
+        <property name="surname" type="string">
+            <column name="SURNAME" length="29" />
+        </property>
+        <property name="name" type="string">
+            <column name="NAME" length="20" />
+        </property>
+        <property name="birth" type="date">
+            <column name="BIRTH" length="10" />
+        </property>
+        <property name="sex" type="string">
+            <column name="SEX" length="1" />
+        </property>
+        <property name="degrees" type="string">
+            <column name="DEGREES" length="50" />
+        </property>
+        <property name="password" type="string">
+            <column name="PASSWORD" length="40" />
+        </property>
+        <property name="mail" type="string">
+            <column name="MAIL" length="30" />
+        </property>
+        <property name="enable" type="java.lang.Boolean">
+            <column name="ENABLE" />
+        </property>
+        <property name="mailVerify" type="java.lang.Boolean">
+            <column name="MAIL_VERIFY" />
+        </property>        
+    </class>
+</hibernate-mapping>
