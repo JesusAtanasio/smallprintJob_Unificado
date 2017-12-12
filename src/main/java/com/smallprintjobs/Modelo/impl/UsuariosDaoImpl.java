@@ -10,12 +10,14 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.hibernate.annotations.Entity;
 
 import com.smallprintjobs.Modelo.IUsuariosDao;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -112,48 +114,55 @@ public class UsuariosDaoImpl implements IUsuariosDao{
 //		 }
 //		
 //	}
-//    public void insertUsuario(String alias, String surname, String name, Date birth, String sex, String degrees, String password, String mail, boolean enable, boolean mailVerify) throws BussinessException {
-//
-//		 Connection connection = null;		
-//		 try {
-//		     connection = getConnection();
-//		
-//		     PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO `USUARIOS` (`alias`, `surname`, `name`, `birth`, "
-//		 		+ "`sex`, `degrees`, `password`, `mail`, `enable`, `mailVerify`, "
-//		 		+ "VALUES ("+  alias  + ", " + 
-//		 					surname + ", " +
-//		 					name +  ", " +
-//		 					birth + "," + 
-//		 					sex + ", " +
-//		 					degrees + ", "+
-//		 					password +", " +
-//		 					mail + ","+  
-//		 					enable +", "+  
-//		 					mailVerify + ")");
-//
-//		     preparedStatement.executeUpdate();    
-//		     
-//		 } catch (SQLException ex) {
-//		     throw new RuntimeException(ex);
-//		 } finally {
-//		     if (connection != null) {
-//		         try {
-//		             connection.close();
-//		         } catch (SQLException ex) {
-//		
-//		         }
-//		     }
-//		 }
-//    }
+    public void insertUser(String alias, String surname, String name, String birth, String sex, String degrees, String password, String mail, int enable, int mailVerify, String audUser,String audTime) throws BussinessException {
+
+		 Connection connection = null;		
+		 try {
+			 String sql = "INSERT INTO USUARIOS (ALIAS, SURNAME, NAME, BIRTH, SEX, DEGREES, PASSWORD, MAIL, ENABLE, MAIL_VERIFY, AUD_USER, AUD_TIME ) "+
+		 		"VALUES ('"+ alias  + "', '" + 
+		 					surname + "', '" +
+		 					name +  "', '" +
+		 					birth + "', '" + 
+		 					sex + "', '" +
+		 					degrees + "', '"+
+		 					password +"', '" +
+		 					mail + "', '"+  
+		 					enable +"', '"+  
+		 					mailVerify +"', '"+
+		 					audUser +"', '"+
+		 					audTime	+ "') ";
+
+	            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+	            stmt = conn.createStatement();
+	            ResultSet rs = stmt.executeQuery(sql);
+		     
+	            Logger.getLogger(sql).setLevel(Level.INFO);
+	            
+	            
+		 } catch (SQLException ex) {
+		     throw new RuntimeException(ex);
+		 } finally {
+		     if (connection != null) {
+		         try {
+		             connection.close();
+		         } catch (SQLException ex) {
+		
+		         }
+		     }
+		 }
+    }
 //    
 
     public void searchUser() throws BussinessException {
-        Connection connection = null;
+        
+    	Connection connection = null;
 
         try {
 
-            String sql = "SELECT * FROM usuario WHERE idusuario=1";
-		      ResultSet rs = stmt.executeQuery(sql);
+            String sql = "SELECT * FROM USUARIOS WHERE id_user=715";
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
 		      
 		      //STEP 5: Extract data from result set		
 		      while(rs.next()){
@@ -162,8 +171,8 @@ public class UsuariosDaoImpl implements IUsuariosDao{
 			         String surname = rs.getString("SURNAME");
 
 			         //Display values
-			         System.out.print("ALIAS: " + alias);
-			         System.out.print(", Age: " + surname);
+			         System.out.print("Alias: " + alias);
+			         System.out.print(", Apellido: " + surname);
 			      }
 
         }catch(SQLException se){
@@ -178,6 +187,7 @@ public class UsuariosDaoImpl implements IUsuariosDao{
 		         if(stmt!=null)
 		            stmt.close();
 		      }catch(SQLException se2){
+		    	  se2.printStackTrace();
 		      }// nothing we can do
 		      try{
 		         if(conn!=null)

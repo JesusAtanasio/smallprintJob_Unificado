@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.smallprintjobs.Beans.Usuario;
 import com.smallprintjobs.Utils.HibernateUtils;
 import com.smallprintjobs.Modelo.*;
-import com.smallprintjobs.Modelo.IUsuariosDao;
+import com.smallprintjobs.Modelo.impl.UsuariosDaoImpl;
 
 
 /**
@@ -32,11 +32,15 @@ public class CrearAlgo {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-//	   IUsuariosDao usuariosDao = new UsuariosDaoImpl(); 
-		  
-//    	usuariosDao.insertUsuario("Suso", "Atc", "Jesús", new Date(), "H", "títulos", "suso", "lt", true, true);
+
+		UsuariosDaoImpl usuariosDao = new UsuariosDaoImpl();
 		
-		usuariosDao.searchUser();
+		try {
+			usuariosDao.searchUser();
+		} catch (BussinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 //		// JDBC driver name and database URL
 //		   final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";  

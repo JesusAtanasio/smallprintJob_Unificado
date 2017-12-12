@@ -1,5 +1,8 @@
 package com.smallprintjobs.Pruebas;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -13,32 +16,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.smallprintjobs.Beans.Usuario;
 import com.smallprintjobs.Utils.HibernateUtils;
 import com.smallprintjobs.Modelo.*;
+import com.smallprintjobs.Modelo.impl.UsuariosDaoImpl;
 
-public class CrearUsuario {
+public class CreateUser {
 	
 	  @Autowired
 	    IUsuariosDao usuariosDao; 
 
 	
-	private final static Logger log = Logger.getLogger(CrearUsuario.class);
+	private final static Logger log = Logger.getLogger(CreateUser.class);
     /**
      * @param args
      */
     public static void main(String[] args) {
         BasicConfigurator.configure();
         Logger.getLogger("org.hibernate").setLevel(Level.WARN);
-        new CrearUsuario();
+        new CreateUser();
     }
 	
 
     
-    public CrearUsuario() {
+    public CreateUser() {
     	
-//    	Usuario usuario = new Usuario();
-//    	
-//    	UsuariosDaoImpl.insert(usuario);
-    	
-    	usuariosDao.insertUsuario("Suso", "Atc", "Jesús", new Date(), "H", "títulos", "suso", "lt", true, true);
+		UsuariosDaoImpl usuariosDao = new UsuariosDaoImpl();
+
+    	try {
+    		
+    		Date date = new Date();
+    		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+    		DateFormat hourdateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			usuariosDao.insertUser("Suso", "Atc", "Jesús",dateFormat.format(date),"H", "títulos", "suso", "lt@ls.com",1, 1,"Prueb", hourdateFormat.format(date));
+			
+			
+		} catch (BussinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	  
     	//UsuariosDaoImpl.insertUsuario("Suso", "Atc", "Jesús", new Date(), "H", "títulos", "suso", "lt", true, true);
 //        
