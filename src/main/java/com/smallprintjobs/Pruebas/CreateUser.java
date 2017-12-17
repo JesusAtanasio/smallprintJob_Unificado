@@ -3,6 +3,7 @@ package com.smallprintjobs.Pruebas;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -20,8 +21,8 @@ import com.smallprintjobs.Modelo.impl.UsuariosDaoImpl;
 
 public class CreateUser {
 	
-	  @Autowired
-	    IUsuariosDao usuariosDao; 
+//	  @Autowired
+//	    IUsuariosDao usuariosDao; 
 
 	
 	private final static Logger log = Logger.getLogger(CreateUser.class);
@@ -31,12 +32,55 @@ public class CreateUser {
     public static void main(String[] args) {
         BasicConfigurator.configure();
         Logger.getLogger("org.hibernate").setLevel(Level.WARN);
-        new CreateUser();
+//        createUser2();
+        deleteUser();
+//        searchUser();
     }
 	
 
     
-    public CreateUser() {
+    private static void searchUser() {
+		UsuariosDaoImpl usuariosDao = new UsuariosDaoImpl();
+		
+        Usuario nuevoUsuario = new Usuario();
+        
+        nuevoUsuario.setId_user(800);
+        try {
+			List datosUser = usuariosDao.searchUser(nuevoUsuario);
+			
+//			for(String str : datosUser) {
+				
+//			}
+			
+
+//		         
+//		      }
+		} catch (BussinessException e) {
+			// TODO Auto-generated catch block
+			
+//			Logger.error("This is error : " + e );
+			e.printStackTrace();
+		}
+	}
+
+
+
+	private static void deleteUser() {  
+		
+		UsuariosDaoImpl usuariosDao = new UsuariosDaoImpl();
+		Usuario nuevoUsuario = new Usuario();
+    
+		nuevoUsuario.setId_user(800);
+		try {
+			 usuariosDao.deleteUser(nuevoUsuario);
+		} catch (BussinessException e) {
+		//		Logger.error("This is error : " + e );
+			e.printStackTrace();
+		}
+
+	}
+
+	public void createUser() {
     	
 		UsuariosDaoImpl usuariosDao = new UsuariosDaoImpl();
 
@@ -52,36 +96,41 @@ public class CreateUser {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	  
-    	//UsuariosDaoImpl.insertUsuario("Suso", "Atc", "Jesús", new Date(), "H", "títulos", "suso", "lt", true, true);
-//        
-//        HibernateUtils.getSessionFactory().close();
+    }
+    
+    public static void createUser2() {
+    	
+		UsuariosDaoImpl usuariosDao = new UsuariosDaoImpl();
+		
+		Date date = new Date("1987/12/11");
+
+
+		
+        Usuario nuevoUsuario = new Usuario();
+        
+        nuevoUsuario.setAlias("Suso");
+        nuevoUsuario.setSurname("Atc");
+        nuevoUsuario.setName("Jesús");
+        
+		nuevoUsuario.setBirth(date);
+        nuevoUsuario.setSex("H");
+        nuevoUsuario.setDegrees("títulos");
+        nuevoUsuario.setPassword("12234");
+        nuevoUsuario.setMail("suso@suso.com");
+        nuevoUsuario.setEnable(true);
+        nuevoUsuario.setMailVerify(true);
+        
+        try {
+			usuariosDao.insertUser(nuevoUsuario);
+		} catch (BussinessException e) {
+			// TODO Auto-generated catch block
+			
+//			Logger.error("This is error : " + e );
+			e.printStackTrace();
+		}
     }
 	
-
-//    private Integer createAndStoreEvent(String alias, String surname,String name, Date nuevoBith, String sex, 
-//    		String degrees,String password,String mail,boolean enable,boolean mail_verify) {
-//        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
-//        session.beginTransaction();
-//        
-//        UsuariosDaoImpl nuevoUsuario = new UsuariosDaoImpl();
-//        
-//        nuevoUsuario.setAlias(alias);
-//        nuevoUsuario.setSurname(surname);
-//        nuevoUsuario.setName(name);
-//        nuevoUsuario.setBirth(nuevoBith);
-//        nuevoUsuario.setDegrees(degrees);
-//        nuevoUsuario.setPassword(password);
-//        nuevoUsuario.setMail(mail);
-//        nuevoUsuario.setEnable(enable);
-//        nuevoUsuario.setMailVerify(mail_verify);
-//        
-//        session.save(nuevoUsuario);
-//        session.getTransaction().commit();
-//        log.info("Insertado: "+nuevoUsuario);
-//        return nuevoUsuario.getId_user();
-//    }
-//    
+    
 //    private List<UsuariosDaoImpl> listEvents() {
 //        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
 //        session.beginTransaction();

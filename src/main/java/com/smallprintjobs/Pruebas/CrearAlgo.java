@@ -36,7 +36,7 @@ public class CrearAlgo {
 		UsuariosDaoImpl usuariosDao = new UsuariosDaoImpl();
 		
 		try {
-			usuariosDao.searchUser();
+//			usuariosDao.searchUser();
 		} catch (BussinessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
