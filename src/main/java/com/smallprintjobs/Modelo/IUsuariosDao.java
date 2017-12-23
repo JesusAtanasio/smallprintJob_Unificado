@@ -11,7 +11,7 @@ import com.smallprintjobs.Beans.Usuario;
 
 public interface IUsuariosDao  {
 	
-    List searchUser(Usuario usuario) throws BussinessException;
+    Usuario searchUser(Usuario usuario) throws BussinessException;
 
 	void insertUser(Usuario usuario) throws BussinessException;
 	

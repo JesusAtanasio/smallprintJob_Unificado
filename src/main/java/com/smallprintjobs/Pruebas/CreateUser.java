@@ -33,8 +33,8 @@ public class CreateUser {
         BasicConfigurator.configure();
         Logger.getLogger("org.hibernate").setLevel(Level.WARN);
 //        createUser2();
-        deleteUser();
-//        searchUser();
+//        deleteUser();
+        searchUser();
     }
 	
 
@@ -46,10 +46,12 @@ public class CreateUser {
         
         nuevoUsuario.setId_user(800);
         try {
-			List datosUser = usuariosDao.searchUser(nuevoUsuario);
+			Usuario Usuario = usuariosDao.searchUser(nuevoUsuario);
 			
 //			for(String str : datosUser) {
-				
+//		         System.out.print(str.);
+//		         System.out.print("SURNAME: " + datosUser.get(1));
+//		         
 //			}
 			
 

@@ -39,7 +39,68 @@ public class UsuariosDaoImpl implements IUsuariosDao{
 	   Statement stmt = null;
 	   
 
-	   public List searchUser(Usuario usuario) throws BussinessException {
+	   public Usuario searchUser(Usuario usuario) throws BussinessException {
+	        
+	        try {
+	        	  final Logger logger
+	        	  	= Logger.getLogger(UsuariosDaoImpl.class.getName());   	  
+	        	  
+				conn = DriverManager.getConnection(DB_URL,USER,PASS);
+				PreparedStatement ps = null;
+				   
+				ps = conn.prepareStatement("SELECT * FROM USUARIOS WHERE ID_USER = ?");
+				 
+				ps.setInt(1, usuario.getId_user());
+				
+				ResultSet rs = ps.executeQuery();
+	
+	
+			      //STEP 5: Extract data from result set
+				while (rs.next()) {
+			         //Retrieve by column name
+				usuario.setAlias(rs.getString("ALIAS"));
+				usuario.setSurname(rs.getString("SURNAME"));
+				usuario.setName(rs.getString("NAME"));
+				usuario.setBirth(rs.getDate("BIRTH"));
+				usuario.setSex(rs.getString("SEX"));
+				usuario.setDegrees(rs.getString("DEGREES"));
+				usuario.setPassword(rs.getString("PASSWORD"));
+				usuario.setMail(rs.getString("MAIL"));
+				usuario.setEnable(rs.getBoolean("ENABLE"));
+				usuario.setMailVerify(rs.getBoolean("MAIL_VERIFY"));
+
+			    	  
+			         //Display values
+			         System.out.print("ALIAS: " + usuario.getAlias());
+			         System.out.print("SURNAME: " + usuario.getSurname());
+			         
+			         
+				}   
+			      
+			      //STEP 6: Clean-up environment
+			      rs.close();
+			      conn.close();
+				 
+				return usuario;
+				
+	        } catch (SQLException ex) {
+				 Logger.getLogger(ex.toString()).setLevel(Level.ERROR);
+			     throw new RuntimeException(ex);
+			 }
+			  finally {
+			     if (conn != null) {
+			         try {
+			             conn.close();
+						 System.out.println("Conexión cerrada");
+			         } catch (SQLException ex) {
+						 System.out.println("No se ha podido cerrar la conexión");
+
+			         }
+			     }
+			 }  
+	    }
+	
+	   public List searchAllUser(Usuario usuario) throws BussinessException {
 	        
 	        try {
 	        	
@@ -98,7 +159,7 @@ public class UsuariosDaoImpl implements IUsuariosDao{
 			     }
 			 }  
 	    }
-	
+	   
 	   @Override
 	   public void insertUser(Usuario usuario) throws BussinessException {
     	
